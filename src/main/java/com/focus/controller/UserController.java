@@ -35,7 +35,6 @@ public class UserController {
 
         // 로그인 없어서 무조건 1번 유저를 조회
         Long currentUserId = 1L;
-
         UserProfileResponse profileResponse = userService.getUserProfile(currentUserId);
 
         return ResponseEntity.ok(ApiResponse.success(List.of(profileResponse), "요청에 성공하였습니다."));
@@ -47,7 +46,6 @@ public class UserController {
 
         // 로그인 없어서 무조건 1번 유저를 조회
         Long currentUserId = 1L;
-
         userService.updateUserProfile(currentUserId, request);
 
         return ResponseEntity.ok(ApiResponse.successWithMessage("사용자 프로필 정보가 성공적으로 수정되었습니다."));
