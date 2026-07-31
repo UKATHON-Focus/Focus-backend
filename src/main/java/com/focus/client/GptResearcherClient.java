@@ -7,6 +7,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -26,13 +27,18 @@ public class GptResearcherClient {
     }
 
     public String runResearch(String prompt) {
-        Map<String, Object> requestBody = Map.of(
-                "task", prompt,
-                "report_type", "research_report"
-        );
+        // OpenAPI ResearchRequest 규격에 맞춘 필수 필드 구성
+        Map<String, Object> requestBody = new HashMap<>();
+        requestBody.put("task", prompt);
+        requestBody.put("report_type", "research_report");
+        requestBody.put("report_source", "web");
+        requestBody.put("tone", "Objective");
+        requestBody.put("repo_name", "");
+        requestBody.put("branch_name", "");
+        requestBody.put("generate_in_background", false); // 결과를 즉시 동기 응답으로 받기 위함
 
         return webClient.post()
-                .uri("/research")
+                .uri("/report/")
                 .bodyValue(requestBody)
                 .retrieve()
                 .bodyToMono(String.class)

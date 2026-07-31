@@ -42,4 +42,13 @@ public class Application {
         this.generatedResume = generatedResume;
         this.status = status;
     }
+
+    public void updateStatus(ApplicationStatus status) {
+        this.status = status;
+    }
+
+    public void updateResult(String agentAnalysis, String generatedResume) {
+        this.agentAnalysis = agentAnalysis;
+        this.generatedResume = generatedResume;
+    }
 }
