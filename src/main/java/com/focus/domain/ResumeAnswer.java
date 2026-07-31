@@ -14,7 +14,7 @@ public class ResumeAnswer {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private JobPosting jobPosting;
@@ -35,9 +35,9 @@ public class ResumeAnswer {
     private String analyzedResult;
 
     @Builder
-    public ResumeAnswer(Member member, JobPosting jobPosting, String conflictResolution,
+    public ResumeAnswer(User user, JobPosting jobPosting, String conflictResolution,
                         String roleAndContribution, String hardestPart, String aiExperience, String analyzedResult) {
-        this.member = member;
+        this.user = user;
         this.jobPosting = jobPosting;
         this.conflictResolution = conflictResolution;
         this.roleAndContribution = roleAndContribution;

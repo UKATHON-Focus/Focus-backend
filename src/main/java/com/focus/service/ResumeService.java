@@ -2,7 +2,7 @@ package com.focus.service;
 
 import com.focus.client.GptResearcherClient;
 import com.focus.domain.JobPosting;
-import com.focus.domain.Member;
+import com.focus.domain.User;
 import com.focus.domain.ResumeAnswer;
 import com.focus.repository.JobPostingRepository;
 import com.focus.repository.MemberRepository;
@@ -23,7 +23,7 @@ public class ResumeService {
 
     @Transactional
     public String generateTailoredResume(ResumeRequestDto dto) {
-        Member member = memberRepository.findById(dto.getMemberId())
+        User user = memberRepository.findById(dto.getMemberId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
         JobPosting jobPosting = jobPostingRepository.findById(dto.getJobPostingId())
@@ -33,7 +33,7 @@ public class ResumeService {
         String analysisResult = gptResearcherClient.runResearch(prompt);
 
         ResumeAnswer resumeAnswer = ResumeAnswer.builder()
-                .member(member)
+                .member(user)
                 .jobPosting(jobPosting)
                 .conflictResolution(dto.getConflictResolution())
                 .roleAndContribution(dto.getRoleAndContribution())

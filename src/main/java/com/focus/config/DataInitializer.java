@@ -1,7 +1,7 @@
 package com.focus.config;
 
 import com.focus.domain.JobPosting;
-import com.focus.domain.Member;
+import com.focus.domain.User;
 import com.focus.repository.JobPostingRepository;
 import com.focus.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // 샘플 회원 저장 (ID: 1)
-        memberRepository.save(new Member("홍길동", "hong@test.com"));
+        memberRepository.save(new User("홍길동"));
 
         // 카카오 공고 데이터 (ID: 1)
         jobPostingRepository.save(JobPosting.builder()
