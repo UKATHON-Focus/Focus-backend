@@ -44,4 +44,12 @@ public class BasicSpec {
         this.languageName = languageName;
         this.languageScore = languageScore;
     }
+
+    public void update(String school, String major, String desiredJob, String languageName, String languageScore) {
+        if (school != null) this.school = school;
+        if (major != null) this.major = major;
+        if (desiredJob != null) this.desiredJob = desiredJob;
+        if (languageName != null) this.languageName = languageName;
+        if (languageScore != null) this.languageScore = languageScore;
+    }
 }
