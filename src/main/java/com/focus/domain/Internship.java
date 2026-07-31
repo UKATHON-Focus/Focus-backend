@@ -42,4 +42,11 @@ public class Internship {
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
+    public void update(String companyName, String role, LocalDate startDate, LocalDate endDate) {
+        if (companyName != null) this.companyName = companyName;
+        if (role != null) this.role = role;
+        if (startDate != null) this.startDate = startDate;
+        if (endDate != null) this.endDate = endDate;
+    }
 }
