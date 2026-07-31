@@ -5,7 +5,7 @@ import com.focus.domain.JobPosting;
 import com.focus.domain.User;
 import com.focus.domain.ResumeAnswer;
 import com.focus.repository.JobPostingRepository;
-import com.focus.repository.MemberRepository;
+import com.focus.repository.UserRepository;
 import com.focus.repository.ResumeAnswerRepository;
 import com.focus.dto.ResumeRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -16,14 +16,14 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ResumeService {
 
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
     private final JobPostingRepository jobPostingRepository;
     private final ResumeAnswerRepository resumeAnswerRepository;
     private final GptResearcherClient gptResearcherClient;
 
     @Transactional
     public String generateTailoredResume(ResumeRequestDto dto) {
-        User user = memberRepository.findById(dto.getMemberId())
+        User user = userRepository.findById(dto.getMemberId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
         JobPosting jobPosting = jobPostingRepository.findById(dto.getJobPostingId())

@@ -3,7 +3,7 @@ package com.focus.config;
 import com.focus.domain.JobPosting;
 import com.focus.domain.User;
 import com.focus.repository.JobPostingRepository;
-import com.focus.repository.MemberRepository;
+import com.focus.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -12,13 +12,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class DataInitializer implements CommandLineRunner {
 
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
     private final JobPostingRepository jobPostingRepository;
 
     @Override
     public void run(String... args) throws Exception {
         // 샘플 회원 저장 (ID: 1)
-        memberRepository.save(new User("홍길동"));
+        userRepository.save(new User("홍길동"));
 
         // 카카오 공고 데이터 (ID: 1)
         jobPostingRepository.save(JobPosting.builder()
