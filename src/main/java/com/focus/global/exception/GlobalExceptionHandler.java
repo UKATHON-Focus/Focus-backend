@@ -1,33 +1,37 @@
 package com.focus.global.exception;
 
+import com.focus.dto.ErrorResponseDto;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(CustomException.class)
-    public ResponseEntity<ErrorDto> handleCustomException(CustomException ex, HttpServletRequest request) {
-        ErrorCode errorCode = ex.getErrorCode();
-
-        String timestamp = ZonedDateTime.now(ZoneId.of("Asia/Seoul"))
-                .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
-
-        ErrorDto errorDto = new ErrorDto(
-                timestamp,
+    public ResponseEntity<ErrorResponseDto> handleCustomException(CustomException e, HttpServletRequest request) {
+        ErrorCode errorCode = e.getErrorCode();
+        ErrorResponseDto response = new ErrorResponseDto(
                 errorCode.getStatus(),
                 errorCode.getError(),
                 errorCode.getCode(),
                 errorCode.getMessage(),
                 request.getRequestURI()
         );
+        return ResponseEntity.status(errorCode.getStatus()).body(response);
+    }
 
-        return ResponseEntity.status(errorCode.getStatus()).body(errorDto);
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponseDto> handleException(Exception e, HttpServletRequest request) {
+        ErrorCode errorCode = ErrorCode.SERVER_ERROR;
+        ErrorResponseDto response = new ErrorResponseDto(
+                errorCode.getStatus(),
+                errorCode.getError(),
+                errorCode.getCode(),
+                errorCode.getMessage(),
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(errorCode.getStatus()).body(response);
     }
 }

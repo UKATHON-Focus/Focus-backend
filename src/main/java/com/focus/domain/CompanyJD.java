@@ -14,7 +14,7 @@ public class CompanyJD {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Id -> id 로 수정
+    private Long jdId; // Id -> id 로 수정
 
     @Column(name = "company_name", nullable = false)
     private String companyName;

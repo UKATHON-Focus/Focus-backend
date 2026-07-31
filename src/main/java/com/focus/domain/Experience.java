@@ -32,4 +32,8 @@ public class Experience {
         this.questionIndex = questionIndex;
         this.answerContent = answerContent;
     }
+
+    public void updateAnswer(String answerContent) {
+        this.answerContent = answerContent;
+    }
 }

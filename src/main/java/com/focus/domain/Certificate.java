@@ -27,4 +27,8 @@ public class Certificate {
         this.user=user;
         this.certName=certName;
     }
+
+    public void update(String certName) {
+        if (certName != null) this.certName = certName;
+    }
 }
