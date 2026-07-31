@@ -1,4 +1,4 @@
-package com.focus.config;
+package com.focus.global.config;
 
 import com.focus.domain.JobPosting;
 import com.focus.domain.User;
