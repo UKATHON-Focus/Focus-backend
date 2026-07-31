@@ -14,7 +14,7 @@ public class Application {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long applicationId;   // ← id 에서 applicationId 로 변경 (getApplicationId() 생성됨)
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
