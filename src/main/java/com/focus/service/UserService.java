@@ -1,9 +1,13 @@
 package com.focus.service;
 
+import com.focus.domain.BasicSpec;
 import com.focus.domain.Certificate;
 import com.focus.domain.Internship;
 import com.focus.domain.User;
 import com.focus.dto.request.UserProfileRequest;
+import com.focus.dto.response.UserProfileResponse;
+import com.focus.global.exception.CustomException;
+import com.focus.global.exception.ErrorCode;
 import com.focus.repository.BasicSpecRepository;
 import com.focus.repository.CertificateRepository;
 import com.focus.repository.InternshipRepository;
@@ -48,5 +52,20 @@ public class UserService {
                     .toList();
             internshipRepository.saveAll(internships);
         }
+    }
+
+    // [마이페이지 조회]
+    @Transactional(readOnly = true)
+    public UserProfileResponse getUserProfile(Long userId) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+        // 연관 데이터 조회
+        BasicSpec basicSpec = basicSpecRepository.findByUserId(userId).orElse(null);
+        List<Certificate> certificates = certificateRepository.findAllByUserId(userId);
+        List<Internship> internships = internshipRepository.findAllByUserId(userId);
+
+        return UserProfileResponse.of(user, basicSpec, certificates, internships);
     }
 }

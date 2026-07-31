@@ -17,8 +17,6 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // 샘플 회원 저장 (ID: 1)
-        userRepository.save(new User("김이화"));
 
         // 카카오 공고 데이터 (ID: 1)
         companyJDRepository.save(CompanyJD.builder()
