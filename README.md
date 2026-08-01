@@ -1,7 +1,3 @@
-# Focus-backend
-유니스 7기 유커톤 백엔드 레포지터리입니다.
-
----
 
 # ERD
 
@@ -11,6 +7,6 @@
 
 ---
 
-## API 명세서
+# API 명세서
 
 - [API 명세서 확인](https://github.com/UKATHON-Focus/Focus-backend/blob/main/API%20명세서.md)
